@@ -42,10 +42,10 @@ jobs:
         run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/blog-API:latest
+        run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/blog-api:latest
 
       - name: Docker Push
-        run: docker push ${{secrets.DOCKER_USER}}/blog-API:latest
+        run: docker push ${{secrets.DOCKER_USER}}/blog-api:latest
 
   Deploy:
     needs: Build
@@ -70,16 +70,16 @@ jobs:
             docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
 
             echo "Stopping previous build"
-            docker stop blog-API
+            docker stop blog-api
 
             echo "Removing previous build"
-            docker rm blog-API
+            docker rm blog-api
 
             echo "Removing old image from local"
-            docker rmi ${{secrets.DOCKER_USER}}/blog-API:latest
+            docker rmi ${{secrets.DOCKER_USER}}/blog-api:latest
 
             echo "Pulling latest image from docker hub"
-            docker pull ${{secrets.DOCKER_USER}}/blog-API:latest
+            docker pull ${{secrets.DOCKER_USER}}/blog-api:latest
 
   Run:
     needs: Deploy
@@ -106,9 +106,9 @@ jobs:
             echo "Starting latest build"
             docker run -e NODE_ENV=production -d \
               --restart always \
-              -dit --name blog-API \
+              -dit --name blog-api \
               -p 1338:1338 \
-              --name blog-API \
-              ${{secrets.DOCKER_USER}}/blog-API:latest
+              --name blog-api \
+              ${{secrets.DOCKER_USER}}/blog-api:latest
 
             echo "Deploy Done"
