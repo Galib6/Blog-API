@@ -15,7 +15,7 @@ jobs:
       - name: Generate .env
         run: |
           echo "HOST=0.0.0.0" > .env
-          echo "PORT=1337" >> .env
+          echo "PORT=1338" >> .env
           echo "APP_KEYS=${{ secrets.PROD_APP_KEYS }}" >> .env
           echo "API_TOKEN_SALT=${{ secrets.PROD_API_TOKEN_SALT }}" >> .env
           echo "TRANSFER_TOKEN_SALT=${{ secrets.PROD_TRANSFER_TOKEN_SALT }}" >> .env
