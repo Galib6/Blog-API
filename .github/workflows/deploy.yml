@@ -103,12 +103,15 @@ jobs:
             echo "Logging to docker hub"
             docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
 
+            echo "Stopping and removing existing container"
+            docker stop blog_api || true
+            docker rm blog_api || true
+
             echo "Starting latest build"
             docker run -e NODE_ENV=production -d \
-              --restart always \
-              -dit --name blog_api \
-              -p 1338:1338 \
-              --name blog_api \
-              ${{secrets.DOCKER_USER}}/blog_api:latest
+            --restart always \
+            -dit --name blog_api \
+            -p 1338:1338 \
+            ${{secrets.DOCKER_USER}}/blog_api:latest
 
             echo "Deploy Done"
