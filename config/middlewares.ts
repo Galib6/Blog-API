@@ -10,7 +10,7 @@ export default [
         "http://localhost:1337",
         "http://localhost:3020",
         "http://174.138.21.33:1338",
-        "https://blog-app.asadullahalgalib.tech",
+        "https://blog-api.asadullahalgalib.tech",
       ],
     },
   },
